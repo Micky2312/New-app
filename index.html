@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drawing Coach</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #7b2ff7, #f107a3);
+      color: white;
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+    input {
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      margin: 10px;
+    }
+    button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #fff;
+      color: #7b2ff7;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #eee;
+    }
+    #preview {
+      margin-top: 20px;
+      max-width: 300px;
+      border: 3px solid white;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎨 Drawing Coach</h1>
+  <p>Upload a photo, and we’ll guide you step by step to draw it!</p>
+
+  <input type="file" accept="image/*" id="upload">
+  <br>
+  <button onclick="showImage()">Show My Photo</button>
+  
+  <div id="result"></div>
+
+  <script>
+    function showImage() {
+      const fileInput = document.getElementById('upload');
+      const result = document.getElementById('result');
+      if (fileInput.files.length === 0) {
+        alert("Please upload an image first!");
+        return;
+      }
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        result.innerHTML = `<img id="preview" src="${e.target.result}" alt="Preview"> 
+        <p>✅ Step 1: Sketch the outline of your face.<br>
+        ✅ Step 2: Add eyes, nose, and lips.<br>
+        ✅ Step 3: Shade lightly to define features.<br>
+        ✅ Step 4: Add final details and hair.</p>`;
+      };
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+</html>
